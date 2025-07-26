@@ -11,7 +11,7 @@ module studentdata::StudentData{
         age: u32,
     }
     private Student[] students;
-    
+
     fun init(){
         students = vector::empty<Student>();
     }
@@ -26,7 +26,7 @@ module studentdata::StudentData{
         students = vector::push_back(students, newStudent);
     }
 
-    public fun getStudentById(id: UID): UID {
+    public entry fun getStudentById(id: UID): UID {
         for (student in &students) {
             if (student.id == id) {
                 return student.id;
