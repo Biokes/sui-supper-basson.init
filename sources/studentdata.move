@@ -1,11 +1,3 @@
-/*
-/// Module: studentdata
-module studentdata::studentdata;
-*/
-
-// For Move coding conventions, see
-// https://docs.sui.io/concepts/sui-move-concepts/conventions
-
 module studentdata::StudentData{
     use sui::object::{Self, UID};
     use sui::string;
@@ -19,9 +11,11 @@ module studentdata::StudentData{
         age: u32,
     }
     private Student[] students;
+    
     fun init(){
         students = vector::empty<Student>();
     }
+
     public entry fun createStudent(studentName: string::String, studentAge: u32, &mut ctx: TxContext) {
         let newStudent = Student {
             id: sui::object::new(ctx),
@@ -31,6 +25,7 @@ module studentdata::StudentData{
         transfer::transfer(student,tx_context::sender(ctx));
         students = vector::push_back(students, newStudent);
     }
+
     public fun getStudentById(id: UID): UID {
         for (student in &students) {
             if (student.id == id) {
